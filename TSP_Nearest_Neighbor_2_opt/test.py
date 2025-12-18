@@ -46,7 +46,7 @@ def two_opt(tour: Tour, cities: List[City]) -> Tour:
                     tour = new_tour
                     best_distance = new_distance
                     improved = True
-        # Keep optimizing until no more improvements can be made
+      
     return tour
 
 
@@ -81,7 +81,7 @@ def create_map(cities: List[City], tour: Tour, filename: str, title: str, line_c
     # Add Directional Arrows
     plugins.PolyLineTextPath(
         path_line,
-        ' \u27A4 ',  # Arrow symbol
+        ' \u27A4 ',  
         repeat=True,
         offset=8,
         attributes={'fill': 'red', 'font-weight': 'bold', 'font-size': '24'}
@@ -97,7 +97,7 @@ def create_map(cities: List[City], tour: Tour, filename: str, title: str, line_c
 
 # Main Execution
 def main():
-    # Use coordinates that create visual "crosses" to show 2-opt efficiency
+   
     cities = [
         (30.0444, 31.2357), (31.2001, 29.9187),
         (24.0889, 32.8998), (25.6872, 32.6396),
@@ -125,4 +125,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()

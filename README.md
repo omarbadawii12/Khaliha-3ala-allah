@@ -30,13 +30,13 @@ __Genetic Algorithm (GA) 🧬__
 - Population-based evolutionary search with selection, crossover, and mutation for global exploration.
   
 
-  ## 🎉 Key Features
+## Key Features🎉
 
 - Random city generation (default: 20 cities) 🌍
 - Euclidean distance matrix
 - Tour visualization for each algorithm 📊
 - Performance comparison (tour cost, execution time, solution quality)
-
+  
 ## Project Outcomes 📊
 
 - Comparative analysis of solution quality (tour cost), execution time, and scalability
@@ -44,7 +44,7 @@ __Genetic Algorithm (GA) 🧬__
 - Insights into the trade-offs between exact methods (optimal but slow) and heuristic/metaheuristic methods (fast but approximate)
 
 
-  ## 📂 Project Structure
+## 📂 Project Structure
 tsp-ai-project/     
  ├──  main.py  # Main script to run experiments, comparisons, and visualizations     
 ├── data/   

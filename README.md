@@ -46,7 +46,7 @@ __Genetic Algorithm (GA) 🧬__
 
   ## 📂 Project Structure
 tsp-ai-project/     
- ├──  main.py               # Main script to run experiments, comparisons, and visualizations     
+ ├──  main.py  # Main script to run experiments, comparisons, and visualizations     
 ├── data/   
 │   └── cities.py            # City generation, distance matrix, and cost function (shared foundation)     
 ├── algorithms/   
@@ -60,5 +60,4 @@ tsp-ai-project/
 │   └── comparison.py        # Functions for benchmarking (time, cost, nodes explored)     
 ├── results/                 # Output folder for plots and comparison reports (generated)     
 ├── requirements.txt         # Dependencies (numpy, matplotlib, etc.)    
-
 └── README.md                # This file

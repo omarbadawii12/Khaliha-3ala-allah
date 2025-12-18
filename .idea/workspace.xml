@@ -4,11 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="467f4914-cd5e-4ed0-bf81-acfb1316f661" name="Changes" comment="update READMEME file" />
+    <list default="true" id="467f4914-cd5e-4ed0-bf81-acfb1316f661" name="Changes" comment="TSP">
+      <change afterPath="$PROJECT_DIR$/tsp_ai_project/a_star.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsp_ai_project/cities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsp_ai_project/map_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/algorithms/a_star_search.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/algorithms/genetic_algorithm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/algorithms/hill_climbing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/algorithms/nearest_neighbor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/algorithms/ucs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/data/cities.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tsp_ai_project/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/results/A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/results/Genetic_Algorithm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/results/Hill_Climbing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/results/Nearest_Neighbor_+_2-opt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/results/UCS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/utils/comparison.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsp_ai_project/utils/visualization.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
@@ -45,16 +73,24 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.a_star_search.executor": "Run",
+    "Python.graph.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.viewmap.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Khaliha-3ala-allah\tsp_ai_project\data" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -78,11 +114,20 @@
       <option name="project" value="LOCAL" />
       <updated>1766016027228</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="TSP">
+      <option name="closed" value="true" />
+      <created>1766072058260</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1766072058260</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update READMEME file" />
-    <option name="LAST_COMMIT_MESSAGE" value="update READMEME file" />
+    <MESSAGE value="TSP" />
+    <option name="LAST_COMMIT_MESSAGE" value="TSP" />
   </component>
 </project>

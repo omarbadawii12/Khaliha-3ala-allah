@@ -17,7 +17,6 @@ def euclidean_distance(city_a: City, city_b: City) -> float:
     )
 
 # Tour Distance Calculation
-# ================================
 def compute_tour_length(tour: Tour, cities: List[City]) -> float:
     """
     Compute the total length of a TSP tour.
@@ -67,7 +66,7 @@ def two_opt(tour: Tour, cities: List[City]) -> Tour:
         for i in range(1, len(tour) - 2):
             for j in range(i + 1, len(tour)):
                 if j - i == 1:
-                    continue  # Skip adjacent edges
+                    continue  
 
                 candidate = tour[:]
                 candidate[i:j] = reversed(tour[i:j])
@@ -230,3 +229,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

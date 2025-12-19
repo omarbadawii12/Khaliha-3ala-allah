@@ -1,227 +1,169 @@
 import math
+import random
 import time
-import tracemalloc
 import folium
-from folium import plugins
+from folium.plugins import PolyLineTextPath
 from typing import List, Tuple
-from dataclasses import dataclass
 
-# ================== Type Definitions ==================
-City = Tuple[float, float]   # (latitude, longitude)
+City = Tuple[float, float]
 Tour = List[int]
 
-# ================== Result Structure ==================
-@dataclass
-class AlgorithmResult:
-    name: str
-    path_cost: float
-    execution_time: float
-    memory_kb: float
-    improvement: float
+# Distance Calculation (Haversine Formula)
 
-# ================== Distance Function (Haversine) ==================
-def haversine_distance(city_a: City, city_b: City) -> float:
-    R = 6371  # Radius of Earth in kilometers
+def haversine(a: City, b: City) -> float:
+    R = 6371  # Earth radius in km
 
-    lat1, lon1 = map(math.radians, city_a)
-    lat2, lon2 = map(math.radians, city_b)
+    lat1, lon1 = map(math.radians, a)
+    lat2, lon2 = map(math.radians, b)
 
     dlat = lat2 - lat1
     dlon = lon2 - lon1
 
-    a = math.sin(dlat / 2) ** 2 + \
+    h = math.sin(dlat / 2) ** 2 + \
         math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
 
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    return R * c
+    return 2 * R * math.atan2(math.sqrt(h), math.sqrt(1 - h))
 
-# ================== Tour Length ==================
-def compute_tour_length(tour: Tour, cities: List[City]) -> float:
-    total = 0.0
-    for i in range(len(tour)):
-        total += haversine_distance(
-            cities[tour[i]],
-            cities[tour[(i + 1) % len(tour)]]
-        )
-    return total
+# TSP Utilities
+def tour_length(tour: Tour, cities: List[City]) -> float:
+    return sum(
+        haversine(cities[tour[i]], cities[tour[(i + 1) % len(tour)]])
+        for i in range(len(tour))
+    )
 
-# ================== TSP Algorithms ==================
-def nearest_neighbor(cities: List[City], start_city: int) -> Tour:
+# Random Nearest Neighbor
+def nearest_neighbor_random(cities: List[City], k: int = 3) -> Tour:
     unvisited = set(range(len(cities)))
-    tour = [start_city]
-    unvisited.remove(start_city)
+
+    start = random.choice(list(unvisited))
+    tour = [start]
+    unvisited.remove(start)
 
     while unvisited:
-        current = tour[-1]
-        nearest = min(
-            unvisited,
-            key=lambda c: haversine_distance(cities[current], cities[c])
+        last = tour[-1]
+
+        distances = sorted(
+            [(i, haversine(cities[last], cities[i])) for i in unvisited],
+            key=lambda x: x[1]
         )
-        tour.append(nearest)
-        unvisited.remove(nearest)
+
+        candidates = distances[:min(k, len(distances))]
+        next_city = random.choice(candidates)[0]
+
+        tour.append(next_city)
+        unvisited.remove(next_city)
 
     return tour
 
+# 2-opt Optimization
 def two_opt(tour: Tour, cities: List[City]) -> Tour:
-    best_distance = compute_tour_length(tour, cities)
-    improved = True
+    best = tour
+    best_dist = tour_length(best, cities)
 
+    improved = True
     while improved:
         improved = False
-        for i in range(1, len(tour) - 1):
+        for i in range(1, len(tour) - 2):
             for j in range(i + 1, len(tour)):
-                new_tour = tour[:i] + tour[i:j][::-1] + tour[j:]
-                new_distance = compute_tour_length(new_tour, cities)
-                if new_distance < best_distance:
-                    tour = new_tour
-                    best_distance = new_distance
+                if j - i == 1:
+                    continue
+
+                new_tour = best[:]
+                new_tour[i:j] = reversed(best[i:j])
+
+                new_dist = tour_length(new_tour, cities)
+                if new_dist < best_dist:
+                    best = new_tour
+                    best_dist = new_dist
                     improved = True
-    return tour
 
-def nn_2opt_solver(cities, start_index):
-    initial = nearest_neighbor(cities, start_index)
-    optimized = two_opt(initial, cities)
-    return optimized
+    return best
 
-# ================== Algorithm Runner ==================
-def run_algorithm(name, solver_func, cities, start_index, baseline_cost=None):
-    tracemalloc.start()
-    start_time = time.perf_counter()
+# Output
 
-    tour = solver_func(cities, start_index)
+def print_simple_output(tour: Tour, names: List[str], cities: List[City]):
+    path = " -> ".join(names[i] for i in tour)
+    path += f" -> {names[tour[0]]}"
 
-    exec_time = time.perf_counter() - start_time
-    _, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    print("\nBest Tour:")
+    print(path)
+    print("Total Distance:", round(tour_length(tour, cities), 2), "km")
 
-    cost = compute_tour_length(tour, cities)
 
-    improvement = 0.0
-    if baseline_cost:
-        improvement = ((baseline_cost - cost) / baseline_cost) * 100
+# Map Visualization with Clear Arrows
+def plot_map(cities: List[City], names: List[str], tour: Tour, filename: str):
+    m = folium.Map(location=cities[tour[0]], zoom_start=6)
 
-    return tour, AlgorithmResult(
-        name=name,
-        path_cost=cost,
-        execution_time=exec_time,
-        memory_kb=peak / 1024,
-        improvement=improvement
-    )
-
-# ================== Map Visualization ==================
-def create_map(cities, city_names, tour, filename, title, color):
-    avg_lat = sum(c[0] for c in cities) / len(cities)
-    avg_lon = sum(c[1] for c in cities) / len(cities)
-
-    m = folium.Map(location=[avg_lat, avg_lon], zoom_start=6, tiles="CartoDB positron")
-
-    for i, (lat, lon) in enumerate(cities):
+    # City markers
+    for order, city_index in enumerate(tour):
         folium.Marker(
-            location=[lat, lon],
-            popup=city_names[i],
-            icon=folium.Icon(color="black")
+            location=cities[city_index],
+            popup=f"{order + 1}. {names[city_index]}",
+            tooltip=names[city_index],
+            icon=folium.Icon(color="blue")
         ).add_to(m)
 
-    path = [cities[i] for i in tour] + [cities[tour[0]]]
-    poly = folium.PolyLine(path, color=color, weight=5).add_to(m)
+    # Lines + arrows
+    for i in range(len(tour)):
+        a = tour[i]
+        b = tour[(i + 1) % len(tour)]
 
-    plugins.PolyLineTextPath(
-        poly, " ➜ ", repeat=True, offset=7,
-        attributes={"fill": "red", "font-size": "18"}
-    ).add_to(m)
+        line = folium.PolyLine(
+            locations=[cities[a], cities[b]],
+            color="red",
+            weight=4
+        ).add_to(m)
 
-    m.get_root().html.add_child(
-        folium.Element(f"<h3 align='center'>{title}</h3>")
-    )
+        PolyLineTextPath(
+            line,
+            " ➜➜ ",
+            repeat=True,
+            offset=8,
+            attributes={
+                "fill": "black",
+                "font-weight": "900",
+                "font-size": "18"
+            }
+        ).add_to(m)
 
     m.save(filename)
+    print("Map with clear arrows saved:", filename)
 
-# ================== City Data ==================
-ALL_CITIES = {
-    "Cairo": (30.044, 31.23),
-    "Alexandria": (31.20, 29.91),
-    "Luxor": (25.68, 32.64),
-    "Aswan": (24.08, 32.89),
-    "Hurghada": (27.25, 33.81),
-    "Suez": (29.96, 32.54),
-    "Port Said": (31.26, 32.30),
-    "Tanta": (30.78, 31.00),
-    "Mansoura": (31.04, 31.37),
-    "Ismailia": (30.59, 32.27),
-    "Fayoum": (29.30, 30.84),
-    "Minya": (28.09, 30.75),
-    "Asyut": (27.17, 31.18),
-    "Sohag": (26.55, 31.69),
-    "Qena": (26.15, 32.71),
-    "Sharm": (27.91, 34.32),
-    "Matruh": (31.35, 27.23),
-    "Zagazig": (30.58, 31.50),
-    "Damietta": (31.41, 31.81),
-    "Damanhur": (31.03, 30.47),
+# Main Program
+print("Select number of cities:")
+print("1 - 5 Cities")
+print("2 - 15 Cities")
+print("3 - 20 Cities")
 
-}
+choice = input("Your choice: ")
 
-# ================== Main ==================
-def main():
-    while True:
-        try:
-            n = int(input("Enter number of cities (5–20): "))
-            if 5 <= n <= 20:
-                break
-        except ValueError:
-            pass
+if choice == "1":
+    from cities_5 import get_cities, get_city_names
+    label = 5
+elif choice == "2":
+    from cities_15 import get_cities, get_city_names
+    label = 15
+elif choice == "3":
+    from cities_20 import get_cities, get_city_names
+    label = 20
+else:
+    raise ValueError("Invalid choice!")
 
-    city_names = list(ALL_CITIES.keys())[:n]
-    cities = list(ALL_CITIES.values())[:n]
+cities = get_cities()
+names = get_city_names()
 
-    print("\nAvailable Cities:")
-    for name in city_names:
-        print("-", name)
+# Run TSP + Measure Time
+start_time = time.perf_counter()
 
-    while True:
-        start_name = input("\nEnter starting city: ").strip().lower()
-        if start_name in [c.lower() for c in city_names]:
-            start_index = [c.lower() for c in city_names].index(start_name)
-            start_city = city_names[start_index]
-            break
+tour = nearest_neighbor_random(cities, k=3)
+tour = two_opt(tour, cities)
 
-    # ===== Baseline NN =====
-    nn_tour, nn_result = run_algorithm(
-        "Nearest Neighbor (Baseline)",
-        lambda c, s: nearest_neighbor(c, s),
-        cities,
-        start_index
-    )
+end_time = time.perf_counter()
+execution_time = end_time - start_time
 
-    # ===== NN + 2-opt =====
-    nn2opt_tour, nn2opt_result = run_algorithm(
-        "Nearest Neighbor + 2-opt",
-        nn_2opt_solver,
-        cities,
-        start_index,
-        baseline_cost=nn_result.path_cost
-    )
+# Output
+print_simple_output(tour, names, cities)
+print("Execution Time:", round(execution_time, 4), "seconds")
 
-    results = [nn_result, nn2opt_result]
-
-    # ===== Comparison Table =====
-    print("\n================ ALGORITHM COMPARISON ================")
-    print(f"{'Algorithm':30} {'Cost (km)':>12} {'Time(s)':>10} {'Memory(KB)':>12} {'Improve%':>10}")
-    print("-" * 85)
-    for r in results:
-        print(f"{r.name:30} {r.path_cost:12.2f} {r.execution_time:10.4f} "
-              f"{r.memory_kb:12.2f} {r.improvement:10.2f}")
-
-    # ===== Maps =====
-    create_map(cities, city_names, nn_tour,
-               "baseline_nn.html",
-               f"Nearest Neighbor (Start: {start_city})",
-               "blue")
-
-    create_map(cities, city_names, nn2opt_tour,
-               "nn_2opt.html",
-               f"Nearest Neighbor + 2-opt (Start: {start_city})",
-               "green")
-
-if __name__ == "__main__":
-    main()
+# Map
+plot_map(cities, names, tour, f"tsp_random_{label}.html")

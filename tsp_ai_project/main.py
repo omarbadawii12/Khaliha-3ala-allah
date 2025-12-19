@@ -1,7 +1,7 @@
 import webbrowser
 import random
 from cities import cities
-from nearest_neighbor import NearestNeighborTSP
+from a_star import AStarTSP
 from map_view import draw_map
 
 city_list = sorted(cities.keys())
@@ -44,42 +44,53 @@ while True:
 print(f"\nStart: {start_city}")
 print(f"End:   {end_city}")
 
-class CustomNearestNeighborTSP(NearestNeighborTSP):
+class CustomAStarTSP(AStarTSP):
     def solve(self, start, end=None):
-        if end is None:
-            end = start
+        if end is None or end == start:
+            path, cost = super().solve(start)
+            total_cost = cost
+            return path, total_cost
+        else:
+            best_path = None
+            best_cost = float('inf')
 
-        path = [start]
-        unvisited = set(self.cities.keys()) - {start}
-        current = start
-        total_cost = 0.0
+            for temp_start in selected_cities.keys():
+                if temp_start == end:
+                    continue
+                path, closed_cost = super().solve(temp_start)
+                # نحذف العودة الأخيرة إلى temp_start
+                open_path = path[:-1]
+                if open_path[-1] != end:
+                    continue
 
-        while unvisited:
-            nearest = min(unvisited, key=lambda city: self.dist(self.cities[current], self.cities[city]))
-            total_cost += self.dist(self.cities[current], self.cities[nearest])
-            path.append(nearest)
-            current = nearest
-            unvisited.remove(nearest)
+                open_cost = closed_cost - self.distance(self.cities[end], self.cities[temp_start])
 
-        if current != end:
-            if end in path[1:-1]:
-                path.remove(end)
-            total_cost += self.dist(self.cities[current], self.cities[end])
-            path.append(end)
-            current = end
+                if open_path[0] == start:
+                    final_path = open_path
+                else:
+                    idx = open_path.index(start)
+                    final_path = open_path[idx:] + open_path[:idx]
 
-        if start == end:
-            total_cost += self.dist(self.cities[current], self.cities[start])
-            path.append(start)
+                if open_cost < best_cost:
+                    best_cost = open_cost
+                    best_path = final_path + [end]
 
-        improved_path, improved_cost = self.two_opt(path, total_cost)
+            if best_path is None:
+                path, closed_cost = super().solve(start)
+                open_cost = closed_cost - self.distance(self.cities[path[-2]], self.cities[start])
+                best_path = path[:-1]
+                best_cost = open_cost
 
-        return improved_path, improved_cost
+            return best_path, best_cost
 
-solver = CustomNearestNeighborTSP(selected_cities)
-path, cost = solver.solve(start=start_city, end=end_city if end_city != start_city else None)
+solver = CustomAStarTSP(selected_cities)
 
-print("\nBest path (Nearest Neighbor + 2-opt):")
+if start_city == end_city:
+    path, cost = solver.solve(start=start_city)
+else:
+    path, cost = solver.solve(start=start_city, end=end_city)
+
+print("\nBest path (A* Search Algorithm):")
 print(" -> ".join(path))
 print(f"Total cost: {round(cost, 2)} km (approximate)")
 

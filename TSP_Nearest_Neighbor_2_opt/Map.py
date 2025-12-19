@@ -7,6 +7,7 @@ from typing import List, Tuple
 City = Tuple[float, float]
 Tour = List[int]
 
+
 # Distance Calculation
 def euclidean_distance(city_a: City, city_b: City) -> float:
     return math.sqrt((city_a[0] - city_b[0]) ** 2 + (city_a[1] - city_b[1]) ** 2)
@@ -46,7 +47,7 @@ def two_opt(tour: Tour, cities: List[City]) -> Tour:
                     tour = new_tour
                     best_distance = new_distance
                     improved = True
-      
+
     return tour
 
 
@@ -81,7 +82,7 @@ def create_map(cities: List[City], tour: Tour, filename: str, title: str, line_c
     # Add Directional Arrows
     plugins.PolyLineTextPath(
         path_line,
-        ' \u27A4 ',  
+        ' \u27A4 ',
         repeat=True,
         offset=8,
         attributes={'fill': 'red', 'font-weight': 'bold', 'font-size': '24'}
@@ -97,13 +98,71 @@ def create_map(cities: List[City], tour: Tour, filename: str, title: str, line_c
 
 # Main Execution
 def main():
-   
+    """"
+    #-----------------------test-------------------------------#
     cities = [
         (30.0444, 31.2357), (31.2001, 29.9187),
         (24.0889, 32.8998), (25.6872, 32.6396),
         (27.2579, 33.8116), (31.0409, 31.3785),
         (27.1783, 31.1859), (28.5092, 34.5138),
         (29.3084, 30.8428), (31.2565, 32.2841)
+    ]
+    #------------------------------------------------------------------------------
+    """
+    """
+    #-----------------------------------5_Cities------------------------------------
+    cities=[
+        (30.04, 31.23),#Cairo
+        (31.20, 29.91),#Alexandria
+        (25.68, 32.64),#Luxor
+        (24.08, 32.89),#Aswan
+        (27.25,33.81)#Hurghada
+    ]
+    #----------------------------------------------------------------------------------
+    """
+    """
+    #---------------------------------10Cities-----------------------------------------------------
+    cities = [
+        (30.04, 31.23),  # Cairo
+        (31.20, 29.91),  # Alexandria
+        (25.68, 32.64),  # Luxor
+        (24.08, 32.89),  # Aswan
+        (27.25, 33.81),  # Hurghada
+        (29.96, 32.54),  # Suez
+        (31.26, 32.30),  # Port Said
+        (30.78, 31.00),  # Tanta
+        (31.04, 31.37),  # Mansoura
+        (30.59, 32.27),  # Ismailia
+        (29.30, 30.84),  # Fayoum
+        (28.09, 30.75),  # Minya
+        (27.17, 31.18),  # Asyut
+        (26.55, 31.69),  # Sohag
+        (26.15, 32.71)  # Qena
+    ]
+    #------------------------------------------------------------------------------------------------
+    """
+    #---------------------------------20Cities-------------------------------------------------------
+    cities = [
+        (30.04, 31.23),  # Cairo
+        (31.20, 29.91),  # Alexandria
+        (25.68, 32.64),  # Luxor
+        (24.08, 32.89),  # Aswan
+        (27.25, 33.81),  # Hurghada
+        (29.96, 32.54),  # Suez
+        (31.26, 32.30),  # Port Said
+        (30.78, 31.00),  # Tanta
+        (31.04, 31.37),  # Mansoura
+        (30.59, 32.27),  # Ismailia
+        (29.30, 30.84),  # Fayoum
+        (28.09, 30.75),  # Minya
+        (27.17, 31.18),  # Asyut
+        (26.55, 31.69),  # Sohag
+        (26.15, 32.71),  # Qena
+        (27.91, 34.32),  # Sharm
+        (31.35, 27.23),  # Matruh
+        (30.58, 31.50),  # Zagazig
+        (31.41, 31.81),  # Damietta
+        (31.03, 30.47)  # Damanhur
     ]
 
     # 1. Initial Solution
@@ -125,5 +184,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()

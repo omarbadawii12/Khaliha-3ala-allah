@@ -89,7 +89,7 @@ def mutate(tour, rate=0.02):
     return tour
 
 def genetic_algorithm(dist, N):
-    start_time = time.time()  # <-- بداية العد
+    start_time = time.time()  # بداية العد
     population = create_population(120, N)
     best = min(population, key=lambda x: fitness(x, dist))
 
@@ -100,7 +100,7 @@ def genetic_algorithm(dist, N):
         if fitness(current, dist) < fitness(best, dist):
             best = current
 
-    exec_time = time.time() - start_time  # <-- نهاية العد
+    exec_time = time.time() - start_time  # نهاية العد
     return best, fitness(best, dist), exec_time
 
 # =========================
@@ -109,19 +109,38 @@ def genetic_algorithm(dist, N):
 
 def visualize(cities, names, tour, filename):
     m = folium.Map(location=cities[tour[0]], zoom_start=6)
+
     for i, idx in enumerate(tour):
+        # Marker with popup
         folium.Marker(
             cities[idx],
             popup=f"{names[idx]} (Step {i})",
-            icon=folium.Icon(color="green" if i==0 else "blue")
+            icon=folium.Icon(color="green" if i==0 else "blue", icon="info-sign")
         ).add_to(m)
-        folium.Marker(
+
+        # Step numbers on map
+        folium.map.Marker(
             cities[idx],
-            icon=DivIcon(html=f'<div style="font-size:12px;font-weight:bold;color:black">{i}</div>')
+            icon=DivIcon(
+                icon_size=(30,30),
+                icon_anchor=(15,15),
+                html=f'<div style="font-size:10px; font-weight:bold; color:black">{i}</div>'
+            )
         ).add_to(m)
+
+    # Path
     path = [cities[i] for i in tour] + [cities[tour[0]]]
-    poly = folium.PolyLine(path, color="red", weight=4, opacity=0.85).add_to(m)
-    PolyLineTextPath(poly, "➜", repeat=400, offset=6, attributes={"fill":"red","font-size":"14","font-weight":"bold"})
+    poly = folium.PolyLine(path, color="blue", weight=4, opacity=0.50).add_to(m)
+
+    # Arrows along the path
+    PolyLineTextPath(
+        poly,
+        "➜",
+        repeat=250,  # أسهم أقل لتقليل التزاحم
+        offset=6,
+        attributes={"fill":"black","font-size":"12","font-weight":"bold"}
+    ).add_to(m)
+
     m.save(filename)
     print(f"\nMap saved as {filename}")
 
@@ -152,4 +171,3 @@ if __name__ == "__main__":
     print(f"Execution Time: {exec_time:.4f} seconds")
 
     visualize(cities, names, best_tour, f"tsp_{choice}_cities.html")
-

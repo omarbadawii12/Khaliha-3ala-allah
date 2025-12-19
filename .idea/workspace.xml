@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="467f4914-cd5e-4ed0-bf81-acfb1316f661" name="Changes" comment="All files has updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsp_ai_project/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tsp_ai_project/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsp_ai_project/tsp_egypt_map.html" beforeDir="false" afterPath="$PROJECT_DIR$/tsp_ai_project/tsp_egypt_map.html" afterDir="false" />
-    </list>
+    <list default="true" id="467f4914-cd5e-4ed0-bf81-acfb1316f661" name="Changes" comment="Editing files" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,7 +57,6 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.a_star.executor": "Run",
     "Python.a_star_search.executor": "Run",
-    "Python.cities.executor": "Run",
     "Python.graph.executor": "Run",
     "Python.main.executor": "Run",
     "Python.viewmap.executor": "Run",
@@ -125,15 +120,7 @@
       <option name="project" value="LOCAL" />
       <updated>1766146427457</updated>
     </task>
-    <task id="LOCAL-00005" summary="All files has updated">
-      <option name="closed" value="true" />
-      <created>1766146620137</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1766146620137</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -141,7 +128,6 @@
     <MESSAGE value="TSP" />
     <MESSAGE value="TSP Projet using A*Search algorithm" />
     <MESSAGE value="Editing files" />
-    <MESSAGE value="All files has updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="All files has updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Editing files" />
   </component>
 </project>

@@ -1,6 +1,5 @@
 import random, math, folium, webbrowser, os, time
 
-# تثبيت العشوائية لضمان تكرار نفس النتائج
 random.seed(42)
 
 def haversine(c1, c2):
@@ -51,4 +50,5 @@ for i, idx in enumerate(best_route):
 folium.PolyLine([coords[i] for i in best_route] + [coords[best_route[0]]], color="blue", weight=4).add_to(m)
 fname = "map_5_cities.html"
 m.save(fname)
+
 webbrowser.open("file://" + os.path.realpath(fname))

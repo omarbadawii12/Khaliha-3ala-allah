@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_775e11cc8c2dcfccaa1c1c97d6187313 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-textpath@1.2.3/leaflet.textpath.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_775e11cc8c2dcfccaa1c1c97d6187313" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_775e11cc8c2dcfccaa1c1c97d6187313 = L.map(
+                "map_775e11cc8c2dcfccaa1c1c97d6187313",
+                {
+                    center: [26.8, 30.8],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_41ac5b93b828219f9c35c1ee256f6764 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_41ac5b93b828219f9c35c1ee256f6764.addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+            var marker_fb227cf86e3f41e965c3d9418425a78c = L.marker(
+                [30.04, 31.23],
+                {
+}
+            ).addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+        var popup_12e5f8a49907cf5c5b88c328351baa3c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a1662f8d982ad919b85c908b05c81c15 = $(`<div id="html_a1662f8d982ad919b85c908b05c81c15" style="width: 100.0%; height: 100.0%;">Cairo</div>`)[0];
+                popup_12e5f8a49907cf5c5b88c328351baa3c.setContent(html_a1662f8d982ad919b85c908b05c81c15);
+            
+        
+
+        marker_fb227cf86e3f41e965c3d9418425a78c.bindPopup(popup_12e5f8a49907cf5c5b88c328351baa3c)
+        ;
+
+        
+    
+    
+            var marker_3011a3f42c4b9385dbfd7ed7bd6e0acc = L.marker(
+                [31.2, 29.91],
+                {
+}
+            ).addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+        var popup_36a0003b59ed29e2f41cc694ea3a5f1b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9b007416b6135b7dfb243210ec16b46a = $(`<div id="html_9b007416b6135b7dfb243210ec16b46a" style="width: 100.0%; height: 100.0%;">Alexandria</div>`)[0];
+                popup_36a0003b59ed29e2f41cc694ea3a5f1b.setContent(html_9b007416b6135b7dfb243210ec16b46a);
+            
+        
+
+        marker_3011a3f42c4b9385dbfd7ed7bd6e0acc.bindPopup(popup_36a0003b59ed29e2f41cc694ea3a5f1b)
+        ;
+
+        
+    
+    
+            var marker_50688b8f4005d92bb2e241fe93eebbc2 = L.marker(
+                [27.25, 33.81],
+                {
+}
+            ).addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+        var popup_a83173b81c1ddf9430902591f88dbc6b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1814cb3fc5739503675710b300630e4a = $(`<div id="html_1814cb3fc5739503675710b300630e4a" style="width: 100.0%; height: 100.0%;">Hurghada</div>`)[0];
+                popup_a83173b81c1ddf9430902591f88dbc6b.setContent(html_1814cb3fc5739503675710b300630e4a);
+            
+        
+
+        marker_50688b8f4005d92bb2e241fe93eebbc2.bindPopup(popup_a83173b81c1ddf9430902591f88dbc6b)
+        ;
+
+        
+    
+    
+            var marker_7288cbc986a1887d751ea1f75d9ad96c = L.marker(
+                [25.68, 32.64],
+                {
+}
+            ).addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+        var popup_ac763a5193b40f3e7e1e16b882c32e56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_011b3cb972120c32246c2c6c10cd7107 = $(`<div id="html_011b3cb972120c32246c2c6c10cd7107" style="width: 100.0%; height: 100.0%;">Luxor</div>`)[0];
+                popup_ac763a5193b40f3e7e1e16b882c32e56.setContent(html_011b3cb972120c32246c2c6c10cd7107);
+            
+        
+
+        marker_7288cbc986a1887d751ea1f75d9ad96c.bindPopup(popup_ac763a5193b40f3e7e1e16b882c32e56)
+        ;
+
+        
+    
+    
+            var marker_926bf34eb31715496ca260e406f18859 = L.marker(
+                [24.08, 32.89],
+                {
+}
+            ).addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+        var popup_a1405e82c131ddb9b0919059cef5fa9d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a4ab3be6161a22c765c9f92cc91c7135 = $(`<div id="html_a4ab3be6161a22c765c9f92cc91c7135" style="width: 100.0%; height: 100.0%;">Aswan</div>`)[0];
+                popup_a1405e82c131ddb9b0919059cef5fa9d.setContent(html_a4ab3be6161a22c765c9f92cc91c7135);
+            
+        
+
+        marker_926bf34eb31715496ca260e406f18859.bindPopup(popup_a1405e82c131ddb9b0919059cef5fa9d)
+        ;
+
+        
+    
+    
+            var poly_line_84ad1dd5f681e64ba5e35781a72753b2 = L.polyline(
+                [[30.04, 31.23], [31.2, 29.91], [27.25, 33.81], [25.68, 32.64], [24.08, 32.89], [30.04, 31.23]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_775e11cc8c2dcfccaa1c1c97d6187313);
+        
+    
+            poly_line_84ad1dd5f681e64ba5e35781a72753b2.setText(
+                "  \u25ba  ",
+                {
+  "repeat": true,
+  "center": false,
+  "below": false,
+  "offset": 7,
+  "orientation": 0,
+  "attributes": {
+  "fill": "red",
+  "font-size": "24",
+},
+}
+            );
+        
+</script>
+</html>

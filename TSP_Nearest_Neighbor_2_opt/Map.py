@@ -8,10 +8,8 @@ from typing import List, Tuple
 City = Tuple[float, float]
 Tour = List[int]
 
-# Distance Calculation (Haversine Formula)
-
 def haversine(a: City, b: City) -> float:
-    R = 6371  # Earth radius in km
+    R = 6371  
 
     lat1, lon1 = map(math.radians, a)
     lat2, lon2 = map(math.radians, b)
@@ -24,14 +22,12 @@ def haversine(a: City, b: City) -> float:
 
     return 2 * R * math.atan2(math.sqrt(h), math.sqrt(1 - h))
 
-# TSP Utilities
 def tour_length(tour: Tour, cities: List[City]) -> float:
     return sum(
         haversine(cities[tour[i]], cities[tour[(i + 1) % len(tour)]])
         for i in range(len(tour))
     )
 
-# Random Nearest Neighbor
 def nearest_neighbor_random(cities: List[City], k: int = 3) -> Tour:
     unvisited = set(range(len(cities)))
 
@@ -55,7 +51,6 @@ def nearest_neighbor_random(cities: List[City], k: int = 3) -> Tour:
 
     return tour
 
-# 2-opt Optimization
 def two_opt(tour: Tour, cities: List[City]) -> Tour:
     best = tour
     best_dist = tour_length(best, cities)
@@ -79,8 +74,6 @@ def two_opt(tour: Tour, cities: List[City]) -> Tour:
 
     return best
 
-# Output
-
 def print_simple_output(tour: Tour, names: List[str], cities: List[City]):
     path = " -> ".join(names[i] for i in tour)
     path += f" -> {names[tour[0]]}"
@@ -90,11 +83,9 @@ def print_simple_output(tour: Tour, names: List[str], cities: List[City]):
     print("Total Distance:", round(tour_length(tour, cities), 2), "km")
 
 
-# Map Visualization with Clear Arrows
 def plot_map(cities: List[City], names: List[str], tour: Tour, filename: str):
     m = folium.Map(location=cities[tour[0]], zoom_start=6)
 
-    # City markers
     for order, city_index in enumerate(tour):
         folium.Marker(
             location=cities[city_index],
@@ -103,7 +94,6 @@ def plot_map(cities: List[City], names: List[str], tour: Tour, filename: str):
             icon=folium.Icon(color="blue")
         ).add_to(m)
 
-    # Lines + arrows
     for i in range(len(tour)):
         a = tour[i]
         b = tour[(i + 1) % len(tour)]
@@ -129,7 +119,6 @@ def plot_map(cities: List[City], names: List[str], tour: Tour, filename: str):
     m.save(filename)
     print("Map with clear arrows saved:", filename)
 
-# Main Program
 print("Select number of cities:")
 print("1 - 5 Cities")
 print("2 - 15 Cities")
@@ -152,7 +141,6 @@ else:
 cities = get_cities()
 names = get_city_names()
 
-# Run TSP + Measure Time
 start_time = time.perf_counter()
 
 tour = nearest_neighbor_random(cities, k=3)
@@ -161,9 +149,7 @@ tour = two_opt(tour, cities)
 end_time = time.perf_counter()
 execution_time = end_time - start_time
 
-# Output
 print_simple_output(tour, names, cities)
 print("Execution Time:", round(execution_time, 4), "seconds")
 
-# Map
 plot_map(cities, names, tour, f"tsp_random_{label}.html")

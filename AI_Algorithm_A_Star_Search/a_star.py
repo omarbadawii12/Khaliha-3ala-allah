@@ -1,6 +1,5 @@
 import math
 import heapq
-from itertools import combinations
 
 class AStarTSP:
     def __init__(self, cities):

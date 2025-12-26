@@ -58,6 +58,6 @@ print(f"Total distance: {round(cost, 2)} km")
 print(f"Execution time: {execution_time:.4f} seconds")
 print("="*60)
 
-draw_map(selected_cities, path)
+draw_map(selected_cities, path, algorithm_name="A* Algorithm")
 print("\nMap generated successfully! Opening in browser...")
 webbrowser.open("tsp_egypt_map.html")

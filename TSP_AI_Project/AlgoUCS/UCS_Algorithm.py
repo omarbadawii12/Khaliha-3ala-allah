@@ -76,8 +76,7 @@ def draw_map(selected_cities, path_names, algorithm_name="Uniform Cost Search (U
     first_city_coords = selected_cities[path_names[0]]
     m = folium.Map(location=first_city_coords, zoom_start=6)
 
-    # رسم الماركرز
-    for i, name in enumerate(path_names[:-1]):  # :-1 عشان الرجوع للأولى ما نعملش ماركر زيادة
+    for i, name in enumerate(path_names[:-1]):
         color = 'green' if i == 0 else 'blue'
         folium.Marker(
             location=selected_cities[name],
@@ -85,7 +84,6 @@ def draw_map(selected_cities, path_names, algorithm_name="Uniform Cost Search (U
             icon=folium.Icon(color=color, icon="info-sign")
         ).add_to(m)
 
-    # رسم الخط والمسار
     points = [selected_cities[name] for name in path_names]
     line = folium.PolyLine(points, color="red", weight=4, opacity=0.7).add_to(m)
 
@@ -97,7 +95,6 @@ def draw_map(selected_cities, path_names, algorithm_name="Uniform Cost Search (U
         attributes={'fill': 'red', 'font-size': '20'}
     ).add_to(m)
 
-    # العنوان اللي هيظهر في أعلى يسار الخريطة (نفس الستايل اللي عملناه في A*)
     title_html = f'''
         <div style="position: fixed; 
                     top: 10px; left: 50px; width: 500px; height: 60px; 
@@ -144,7 +141,6 @@ def main():
         print(f"Total Distance: {total_dist:.2f} KM")
         print(f"Execution Time: {end_time - start_time:.5f} Seconds")
 
-        # استدعاء الخريطة مع اسم الخوارزمية
         draw_map(selected_cities, path_names, algorithm_name="Uniform Cost Search (UCS)")
     else:
         print("No solution found.")

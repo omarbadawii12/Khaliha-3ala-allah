@@ -7,7 +7,6 @@ from map_view import draw_map
 print("=== TSP Solver for Egyptian Cities ===")
 print("Choose the group size: 5, 15, or 20 cities (fixed groups, no randomness)\n")
 
-# اختيار عدد المدن
 while True:
     try:
         n = int(input("Enter number of cities (5, 15, or 20): "))
@@ -18,7 +17,6 @@ while True:
     except ValueError:
         print("Please enter a valid number.")
 
-# اختيار الجروب المناسب
 if n == 5:
     selected_cities = group_5
     print("\nYou selected: Small Group (5 cities)")
@@ -29,28 +27,22 @@ else:
     selected_cities = group_20
     print("\nYou selected: Large Group (20 cities - All cities)")
 
-# عرض المدن المتاحة مرتبة أبجديًا
 city_names = sorted(selected_cities.keys())
 print("\nAvailable cities in this group:")
 for i, city in enumerate(city_names, 1):
     print(f"  {i:2}. {city}")
 
-# اختيار نقطة البداية تلقائيًا
 default_start = "Cairo" if "Cairo" in selected_cities else city_names[0]
 print(f"\nSolving optimal TSP tour starting and ending at {default_start}...")
 
-# قياس وقت البداية
 start_time = time.time()
 
-# تشغيل A* Search
 solver = AStarTSP(selected_cities)
 path, cost = solver.solve(default_start)
 
-# قياس وقت النهاية
 end_time = time.time()
 execution_time = end_time - start_time
 
-# عرض النتيجة
 print("\n" + "="*60)
 print("Best optimal path found (A* Search with MST heuristic):")
 print(" → ".join(path))

@@ -1,4 +1,3 @@
-# map_view.py (النسخة المعدلة)
 
 import folium
 from folium.plugins import PolyLineTextPath
@@ -7,7 +6,6 @@ def draw_map(cities, path, algorithm_name="A* Algorithm"):
     start_city = path[0]
     end_city = path[-1]
 
-    # حساب المركز التقريبي للخريطة (موقع القاهرة عادةً يكون مناسب)
     m = folium.Map(location=cities[start_city], zoom_start=6)
 
     points = []
@@ -32,7 +30,6 @@ def draw_map(cities, path, algorithm_name="A* Algorithm"):
             icon=folium.Icon(color=color, icon="info-sign")
         ).add_to(m)
 
-    # رسم المسار الأساسي
     route = folium.PolyLine(
         points,
         color="blue",
@@ -40,7 +37,6 @@ def draw_map(cities, path, algorithm_name="A* Algorithm"):
         opacity=0.8
     ).add_to(m)
 
-    # إضافة الأسهم على الخط
     PolyLineTextPath(
         route,
         ' ▶ ',
@@ -53,7 +49,6 @@ def draw_map(cities, path, algorithm_name="A* Algorithm"):
         }
     ).add_to(m)
 
-    # إضافة العنوان في أعلى يسار الخريطة
     title_html = f'''
         <div style="position: fixed; 
                     top: 10px; left: 50px; width: 300px; height: 50px; 
@@ -66,5 +61,4 @@ def draw_map(cities, path, algorithm_name="A* Algorithm"):
     '''
     m.get_root().html.add_child(folium.Element(title_html))
 
-    # حفظ الخريطة
     m.save("tsp_egypt_map.html")

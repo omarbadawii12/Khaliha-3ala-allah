@@ -1,4 +1,3 @@
-# Genetic_Algorithm.py (النسخة المعدلة مع إضافة عنوان أنيق على الخريطة زي باقي الخوارزميات)
 
 import math
 import time
@@ -159,10 +158,6 @@ def visualize(cities, names, tour, filename, num_cities):
 
     m.save(filename)
     print(f"\nMap saved as {filename}")
-
-# =========================
-# Main
-# =========================
 
 if __name__ == "__main__":
     choice = input("Choose number of cities (5 / 15 / 20): ")

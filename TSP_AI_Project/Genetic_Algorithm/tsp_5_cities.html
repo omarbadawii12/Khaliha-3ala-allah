@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_46a3968d7f21b6ce03684ae279bdf107 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-textpath@1.2.3/leaflet.textpath.min.js"></script>
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    top: 10px; left: 50px; width: 500px; height: 80px; 
+                    background-color: white; border:2px solid #1e3a8a; 
+                    z-index:9999; font-size:24px; padding: 15px;
+                    border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+                    font-weight: bold; text-align: center; line-height: 1.4; color: #1e3a8a;">
+            <b>Genetic Algorithm (GA)</b><br>
+            Traveling Salesman Problem (TSP) - 5 Cities
+        </div>
+    
+    
+            <div class="folium-map" id="map_46a3968d7f21b6ce03684ae279bdf107" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_46a3968d7f21b6ce03684ae279bdf107 = L.map(
+                "map_46a3968d7f21b6ce03684ae279bdf107",
+                {
+                    center: [27.25, 33.81],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6b5f93090830faa8b7d9ecffc65498f5 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_6b5f93090830faa8b7d9ecffc65498f5.addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var marker_2dc868d437523bfaf1003e0c6f9361b8 = L.marker(
+                [27.25, 33.81],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var icon_78c38d683e1cc4262aecbfa9449325fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_79620f51c1c4e70548faf826ef07b518 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_626956585cf8a6673dcf87bd9e289233 = $(`<div id="html_626956585cf8a6673dcf87bd9e289233" style="width: 100.0%; height: 100.0%;">Hurghada (Step 0)</div>`)[0];
+                popup_79620f51c1c4e70548faf826ef07b518.setContent(html_626956585cf8a6673dcf87bd9e289233);
+            
+        
+
+        marker_2dc868d437523bfaf1003e0c6f9361b8.bindPopup(popup_79620f51c1c4e70548faf826ef07b518)
+        ;
+
+        
+    
+    
+                marker_2dc868d437523bfaf1003e0c6f9361b8.setIcon(icon_78c38d683e1cc4262aecbfa9449325fd);
+            
+    
+            var marker_e56c75a09c121b952d81559c86394ee9 = L.marker(
+                [27.25, 33.81],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var div_icon_b1e850a427d8aea8fa47c7bebe51dc29 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px; font-weight:bold; color:black\"\u003e0\u003c/div\u003e",
+  "iconSize": [30, 30],
+  "iconAnchor": [15, 15],
+  "className": "empty",
+});
+        
+    
+                marker_e56c75a09c121b952d81559c86394ee9.setIcon(div_icon_b1e850a427d8aea8fa47c7bebe51dc29);
+            
+    
+            var marker_d2c12e389c2586ae3bd2270aa0cb7af4 = L.marker(
+                [30.04, 31.23],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var icon_104127b3b2b9083c75663b15d1d547e0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fbfa3511bd4bcd7b043c539e2ac46f6e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_740b90abf9f64a970e7f60b2405c34a2 = $(`<div id="html_740b90abf9f64a970e7f60b2405c34a2" style="width: 100.0%; height: 100.0%;">Cairo (Step 1)</div>`)[0];
+                popup_fbfa3511bd4bcd7b043c539e2ac46f6e.setContent(html_740b90abf9f64a970e7f60b2405c34a2);
+            
+        
+
+        marker_d2c12e389c2586ae3bd2270aa0cb7af4.bindPopup(popup_fbfa3511bd4bcd7b043c539e2ac46f6e)
+        ;
+
+        
+    
+    
+                marker_d2c12e389c2586ae3bd2270aa0cb7af4.setIcon(icon_104127b3b2b9083c75663b15d1d547e0);
+            
+    
+            var marker_35ea8dceb39485517604e216456edbcb = L.marker(
+                [30.04, 31.23],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var div_icon_06c7eaf9b55c11bc0aa7eb2a42f8f186 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px; font-weight:bold; color:black\"\u003e1\u003c/div\u003e",
+  "iconSize": [30, 30],
+  "iconAnchor": [15, 15],
+  "className": "empty",
+});
+        
+    
+                marker_35ea8dceb39485517604e216456edbcb.setIcon(div_icon_06c7eaf9b55c11bc0aa7eb2a42f8f186);
+            
+    
+            var marker_7577c9a759b380b2c9b7d50f58943178 = L.marker(
+                [31.2, 29.91],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var icon_b2d5da72c47373f264d9925a14466290 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f353260d9ba7005a7e652dae7e86c5cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dba030e411f68c1440493cce1d4d6871 = $(`<div id="html_dba030e411f68c1440493cce1d4d6871" style="width: 100.0%; height: 100.0%;">Alexandria (Step 2)</div>`)[0];
+                popup_f353260d9ba7005a7e652dae7e86c5cd.setContent(html_dba030e411f68c1440493cce1d4d6871);
+            
+        
+
+        marker_7577c9a759b380b2c9b7d50f58943178.bindPopup(popup_f353260d9ba7005a7e652dae7e86c5cd)
+        ;
+
+        
+    
+    
+                marker_7577c9a759b380b2c9b7d50f58943178.setIcon(icon_b2d5da72c47373f264d9925a14466290);
+            
+    
+            var marker_af71bd6301801e2c045214d7e1539e6b = L.marker(
+                [31.2, 29.91],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var div_icon_582569818d0cb75ae81594b5a32f02bd = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px; font-weight:bold; color:black\"\u003e2\u003c/div\u003e",
+  "iconSize": [30, 30],
+  "iconAnchor": [15, 15],
+  "className": "empty",
+});
+        
+    
+                marker_af71bd6301801e2c045214d7e1539e6b.setIcon(div_icon_582569818d0cb75ae81594b5a32f02bd);
+            
+    
+            var marker_b241fb3834674911895193c6b984cd04 = L.marker(
+                [25.68, 32.64],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var icon_bff0b74e3be420b8370ffb3cf3a44abf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d1b1dccfed923d7302f14942fd85e843 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bb7796c654ce10c50be6409be844c2e3 = $(`<div id="html_bb7796c654ce10c50be6409be844c2e3" style="width: 100.0%; height: 100.0%;">Luxor (Step 3)</div>`)[0];
+                popup_d1b1dccfed923d7302f14942fd85e843.setContent(html_bb7796c654ce10c50be6409be844c2e3);
+            
+        
+
+        marker_b241fb3834674911895193c6b984cd04.bindPopup(popup_d1b1dccfed923d7302f14942fd85e843)
+        ;
+
+        
+    
+    
+                marker_b241fb3834674911895193c6b984cd04.setIcon(icon_bff0b74e3be420b8370ffb3cf3a44abf);
+            
+    
+            var marker_11c73831cdee26af9973f6fef9e1dfec = L.marker(
+                [25.68, 32.64],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var div_icon_664656304b55ea1cfc54076cca60bee8 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px; font-weight:bold; color:black\"\u003e3\u003c/div\u003e",
+  "iconSize": [30, 30],
+  "iconAnchor": [15, 15],
+  "className": "empty",
+});
+        
+    
+                marker_11c73831cdee26af9973f6fef9e1dfec.setIcon(div_icon_664656304b55ea1cfc54076cca60bee8);
+            
+    
+            var marker_edbc2795ddfb1a83f83c867b83572157 = L.marker(
+                [24.08, 32.89],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var icon_14b2bbccc29118eb72db2f961c7cc309 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5759e470f8539599b2604c90a6cea130 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3f0675677c5ac481b74ed8806c03bfa0 = $(`<div id="html_3f0675677c5ac481b74ed8806c03bfa0" style="width: 100.0%; height: 100.0%;">Aswan (Step 4)</div>`)[0];
+                popup_5759e470f8539599b2604c90a6cea130.setContent(html_3f0675677c5ac481b74ed8806c03bfa0);
+            
+        
+
+        marker_edbc2795ddfb1a83f83c867b83572157.bindPopup(popup_5759e470f8539599b2604c90a6cea130)
+        ;
+
+        
+    
+    
+                marker_edbc2795ddfb1a83f83c867b83572157.setIcon(icon_14b2bbccc29118eb72db2f961c7cc309);
+            
+    
+            var marker_a2b15a0f8edc7bdf2894849d88c4741a = L.marker(
+                [24.08, 32.89],
+                {
+}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            var div_icon_de77a5bf0626b6cb0ae676e2d97dcb15 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px; font-weight:bold; color:black\"\u003e4\u003c/div\u003e",
+  "iconSize": [30, 30],
+  "iconAnchor": [15, 15],
+  "className": "empty",
+});
+        
+    
+                marker_a2b15a0f8edc7bdf2894849d88c4741a.setIcon(div_icon_de77a5bf0626b6cb0ae676e2d97dcb15);
+            
+    
+            var poly_line_922f9c7bcc556b08f3772253d40bfdbe = L.polyline(
+                [[27.25, 33.81], [30.04, 31.23], [31.2, 29.91], [25.68, 32.64], [24.08, 32.89], [27.25, 33.81]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_46a3968d7f21b6ce03684ae279bdf107);
+        
+    
+            poly_line_922f9c7bcc556b08f3772253d40bfdbe.setText(
+                "\u279c",
+                {
+  "repeat": 250,
+  "center": false,
+  "below": false,
+  "offset": 6,
+  "orientation": 0,
+  "attributes": {
+  "fill": "black",
+  "font-size": "12",
+  "font-weight": "bold",
+},
+}
+            );
+        
+</script>
+</html>

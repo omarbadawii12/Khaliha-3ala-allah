@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_add6e66ed153fd1fe56c03c8cac9a39f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-textpath@1.2.3/leaflet.textpath.min.js"></script>
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    top: 10px; left: 50px; width: 500px; height: 60px; 
+                    background-color: white; border:2px solid grey; 
+                    z-index:9999; font-size:24px; padding: 15px;
+                    border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    font-weight: bold; text-align: center;">
+            <b>Uniform Cost Search (UCS)</b>
+        </div>
+    
+    
+            <div class="folium-map" id="map_add6e66ed153fd1fe56c03c8cac9a39f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_add6e66ed153fd1fe56c03c8cac9a39f = L.map(
+                "map_add6e66ed153fd1fe56c03c8cac9a39f",
+                {
+                    center: [30.04, 31.23],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_62dfbbb706573c351b0f2bb7c74cf797 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_62dfbbb706573c351b0f2bb7c74cf797.addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            var marker_621fd6a45fddc6bbe72b97c51248967c = L.marker(
+                [30.04, 31.23],
+                {
+}
+            ).addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            var icon_86c098d7bc43035b054aa243eb0cd865 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1a74f3ba51b3c35c35d63348a4233269 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_121e767a1825734a3997f6943405491f = $(`<div id="html_121e767a1825734a3997f6943405491f" style="width: 100.0%; height: 100.0%;">1: Cairo</div>`)[0];
+                popup_1a74f3ba51b3c35c35d63348a4233269.setContent(html_121e767a1825734a3997f6943405491f);
+            
+        
+
+        marker_621fd6a45fddc6bbe72b97c51248967c.bindPopup(popup_1a74f3ba51b3c35c35d63348a4233269)
+        ;
+
+        
+    
+    
+                marker_621fd6a45fddc6bbe72b97c51248967c.setIcon(icon_86c098d7bc43035b054aa243eb0cd865);
+            
+    
+            var marker_3d63910c81663f7ff9c52b7646497c2f = L.marker(
+                [31.2, 29.91],
+                {
+}
+            ).addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            var icon_d0120e270c3a0bbe91946382ff4efc91 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_72261835152569f2c2c61ee89c4e0119 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a6a1a61ad4ea4a326116914db4ab6aa7 = $(`<div id="html_a6a1a61ad4ea4a326116914db4ab6aa7" style="width: 100.0%; height: 100.0%;">2: Alexandria</div>`)[0];
+                popup_72261835152569f2c2c61ee89c4e0119.setContent(html_a6a1a61ad4ea4a326116914db4ab6aa7);
+            
+        
+
+        marker_3d63910c81663f7ff9c52b7646497c2f.bindPopup(popup_72261835152569f2c2c61ee89c4e0119)
+        ;
+
+        
+    
+    
+                marker_3d63910c81663f7ff9c52b7646497c2f.setIcon(icon_d0120e270c3a0bbe91946382ff4efc91);
+            
+    
+            var marker_9eddbfb32ae97cc3b68ed7a226af0464 = L.marker(
+                [27.25, 33.81],
+                {
+}
+            ).addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            var icon_c284cb357f1d5221d98b82a1be852400 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_89bb488a3f1ec1be0807546203569c50 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_104ea766f4f1b9f39315560f215580c3 = $(`<div id="html_104ea766f4f1b9f39315560f215580c3" style="width: 100.0%; height: 100.0%;">3: Hurghada</div>`)[0];
+                popup_89bb488a3f1ec1be0807546203569c50.setContent(html_104ea766f4f1b9f39315560f215580c3);
+            
+        
+
+        marker_9eddbfb32ae97cc3b68ed7a226af0464.bindPopup(popup_89bb488a3f1ec1be0807546203569c50)
+        ;
+
+        
+    
+    
+                marker_9eddbfb32ae97cc3b68ed7a226af0464.setIcon(icon_c284cb357f1d5221d98b82a1be852400);
+            
+    
+            var marker_826cecba3580c747fcea25d702cdbd55 = L.marker(
+                [25.68, 32.64],
+                {
+}
+            ).addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            var icon_c6516b5cfdd5098cfd302d51ce3b0863 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_84be95819ca14186707be89b9d0a38e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aa8a0d99962e18cd87e6b5be1bf11c55 = $(`<div id="html_aa8a0d99962e18cd87e6b5be1bf11c55" style="width: 100.0%; height: 100.0%;">4: Luxor</div>`)[0];
+                popup_84be95819ca14186707be89b9d0a38e7.setContent(html_aa8a0d99962e18cd87e6b5be1bf11c55);
+            
+        
+
+        marker_826cecba3580c747fcea25d702cdbd55.bindPopup(popup_84be95819ca14186707be89b9d0a38e7)
+        ;
+
+        
+    
+    
+                marker_826cecba3580c747fcea25d702cdbd55.setIcon(icon_c6516b5cfdd5098cfd302d51ce3b0863);
+            
+    
+            var marker_01c9fbf4254eb8254583784de0565361 = L.marker(
+                [24.08, 32.89],
+                {
+}
+            ).addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            var icon_506833d642892cc6ed2c68ae864a43e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a6a46308a869775ec571f9cbde5dd1ab = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_39a53c3ddd873a75810d18b5b0bcbac8 = $(`<div id="html_39a53c3ddd873a75810d18b5b0bcbac8" style="width: 100.0%; height: 100.0%;">5: Aswan</div>`)[0];
+                popup_a6a46308a869775ec571f9cbde5dd1ab.setContent(html_39a53c3ddd873a75810d18b5b0bcbac8);
+            
+        
+
+        marker_01c9fbf4254eb8254583784de0565361.bindPopup(popup_a6a46308a869775ec571f9cbde5dd1ab)
+        ;
+
+        
+    
+    
+                marker_01c9fbf4254eb8254583784de0565361.setIcon(icon_506833d642892cc6ed2c68ae864a43e9);
+            
+    
+            var poly_line_2de6badc8c6b35006cb59c84e897e9f1 = L.polyline(
+                [[30.04, 31.23], [31.2, 29.91], [27.25, 33.81], [25.68, 32.64], [24.08, 32.89], [30.04, 31.23]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_add6e66ed153fd1fe56c03c8cac9a39f);
+        
+    
+            poly_line_2de6badc8c6b35006cb59c84e897e9f1.setText(
+                "  \u25ba  ",
+                {
+  "repeat": true,
+  "center": false,
+  "below": false,
+  "offset": 7,
+  "orientation": 0,
+  "attributes": {
+  "fill": "red",
+  "font-size": "20",
+},
+}
+            );
+        
+</script>
+</html>
